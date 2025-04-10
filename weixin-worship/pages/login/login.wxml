@@ -1,0 +1,28 @@
+<view class="container login-container">
+  <view class="logo-container">
+    <image class="logo" src="../../images/logo.png" mode="aspectFit"></image>
+    <text class="app-name">远程祭祖平台</text>
+    <text class="app-slogan">愿远方不再遥远，愿思念有形可触</text>
+  </view>
+
+  <view class="login-form">
+    <view class="input-group">
+      <text class="input-label">用户名</text>
+      <input type="text" placeholder="请输入用户名" bindinput="usernameInput" value="{{username}}" />
+    </view>
+    <view class="input-group">
+      <text class="input-label">密码</text>
+      <input type="password" placeholder="请输入密码" bindinput="passwordInput" value="{{password}}" />
+    </view>
+
+    <button class="btn btn-primary login-btn" bindtap="handleLogin" loading="{{isLoading}}">登录</button>
+    <button class="btn btn-secondary register-btn" bindtap="handleRegister">注册</button>
+    
+    <view class="wechat-login">
+      <button class="wechat-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+        <image class="wechat-icon" src="../../images/wechat.png" mode="aspectFit"></image>
+        微信一键登录
+      </button>
+    </view>
+  </view>
+</view> 

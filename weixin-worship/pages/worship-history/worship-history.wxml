@@ -1,0 +1,37 @@
+<view class="container worship-history-container">
+  <view class="header">
+    <text class="page-title">我的祭祖记录</text>
+    <text class="page-subtitle">记录您的虔诚与思念</text>
+  </view>
+
+  <view class="history-list">
+    <block wx:if="{{records.length > 0}}">
+      <view class="history-item" wx:for="{{records}}" wx:key="id">
+        <view class="history-date">
+          <text class="history-day">{{item.dateInfo.day}}</text>
+          <text class="history-month">{{item.dateInfo.month}}月</text>
+          <text class="history-year">{{item.dateInfo.year}}</text>
+        </view>
+        <view class="history-content">
+          <view class="history-header">
+            <text class="history-title">祭祖 {{item.ancestorName}}</text>
+            <text class="history-time">{{item.dateInfo.time}}</text>
+          </view>
+          <view class="offerings-list">
+            <text class="offerings-label">祭品:</text>
+            <text class="offerings-value">{{item.offerings}}</text>
+          </view>
+          <view class="wishes-content" wx:if="{{item.wishes}}">
+            <text class="wishes-label">祝福语:</text>
+            <text class="wishes-value">{{item.wishes}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="empty-state" wx:else>
+      <image class="empty-icon" src="/images/offering-icon.png" mode="aspectFit"></image>
+      <text class="empty-text">暂无祭祖记录</text>
+      <view class="start-btn" bindtap="navigateToWorship">开始祭祖</view>
+    </view>
+  </view>
+</view> 

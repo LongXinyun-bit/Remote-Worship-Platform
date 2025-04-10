@@ -1,0 +1,58 @@
+<view class="container profile-container">
+  <view class="user-info-section">
+    <image class="user-bg" src="/images/profile-bg.png" mode="aspectFill"></image>
+    <view class="user-avatar-container">
+      <image class="user-avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+    </view>
+    <view class="user-detail">
+      <text class="user-name">{{userInfo.nickName || '亲爱的用户'}}</text>
+      <view class="user-stats">
+        <view class="stat-item">
+          <text class="stat-value">{{stats.worshipCount || 0}}</text>
+          <text class="stat-label">祭祖次数</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{stats.ancestorCount || 0}}</text>
+          <text class="stat-label">先祖人数</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="menu-section">
+    <view class="menu-group">
+      <view class="menu-item" bindtap="navigateToMyWorship">
+        <image class="menu-icon" src="/images/menu_worship.png"></image>
+        <text class="menu-text">我的祭祖记录</text>
+        <text class="menu-arrow">></text>
+      </view>
+      <view class="menu-item" bindtap="navigateToMyAncestors">
+        <image class="menu-icon" src="/images/menu_ancestors.png"></image>
+        <text class="menu-text">我的先祖</text>
+        <text class="menu-arrow">></text>
+      </view>
+      <view class="menu-item" bindtap="navigateToFavorites">
+        <image class="menu-icon" src="/images/menu_favorites.png"></image>
+        <text class="menu-text">收藏</text>
+        <text class="menu-arrow">></text>
+      </view>
+    </view>
+
+    <view class="menu-group">
+      <view class="menu-item" bindtap="navigateToHelp">
+        <image class="menu-icon" src="/images/menu_help.png"></image>
+        <text class="menu-text">帮助与反馈</text>
+        <text class="menu-arrow">></text>
+      </view>
+      <view class="menu-item" bindtap="navigateToAbout">
+        <image class="menu-icon" src="/images/menu_about.png"></image>
+        <text class="menu-text">关于我们</text>
+        <text class="menu-arrow">></text>
+      </view>
+    </view>
+  </view>
+
+  <view class="logout-section">
+    <button class="logout-btn" bindtap="handleLogout">退出登录</button>
+  </view>
+</view> 

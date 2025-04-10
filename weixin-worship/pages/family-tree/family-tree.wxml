@@ -1,0 +1,257 @@
+<view class="family-tree-container">
+  <!-- 页面头部 -->
+  <view class="header">
+    <text class="page-title">家族树</text>
+    <text class="page-subtitle">记录传承，铭记家族历史</text>
+  </view>
+
+  <!-- 主内容区 -->
+  <view class="content-area">
+    <!-- 工具栏 -->
+    <view class="toolbar">
+      <view class="tool-btn" bindtap="addFamilyMember">
+        <image class="tool-btn-icon" src="/images/add-person.png" mode="aspectFit"></image>
+        <text>添加成员</text>
+      </view>
+      <view class="tool-btn" bindtap="toggleEditMode">
+        <image class="tool-btn-icon" src="/images/edit.png" mode="aspectFit"></image>
+        <text>{{isEditMode ? '完成编辑' : '编辑'}}</text>
+      </view>
+    </view>
+
+    <!-- 家族树视图 -->
+    <scroll-view class="tree-view" scroll-y enable-flex>
+      <!-- 空状态显示 -->
+      <view class="empty-state" wx:if="{{!familyMembers || familyMembers.length === 0}}">
+        <image class="empty-image" src="/images/empty-family.png" mode="aspectFit"></image>
+        <text class="empty-title">家族树尚未创建</text>
+        <text class="empty-desc">点击添加先祖或家族成员，开始构建您的家族树</text>
+        <button class="create-btn" bindtap="addFamilyMember">添加第一位成员</button>
+      </view>
+
+      <!-- 家族树结构 -->
+      <view class="family-tree" wx:else>
+        <!-- 中央树干线 -->
+        <view class="tree-trunk"></view>
+
+        <!-- 第一代（祖辈） -->
+        <view class="generation" wx:if="{{generations.generation1.length > 0}}">
+          <view class="generation-label">先祖辈</view>
+          <view class="members-row">
+            <view class="horizontal-line" wx:if="{{generations.generation1.length > 1}}"></view>
+            <view class="member-node" wx:for="{{generations.generation1}}" wx:key="id" bindtap="selectMember" data-id="{{item.id}}" bindlongpress="showDeleteButton" data-id="{{item.id}}">
+              <view class="member-card {{item.isAlive ? '' : 'deceased'}} {{selectedMemberId === item.id ? 'selected' : ''}}">
+                <image class="member-avatar" src="{{item.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+                <text class="member-name">{{item.name}}</text>
+                <text class="member-dates">{{item.birthYear}}{{item.deathYear ? '-'+item.deathYear : ''}}</text>
+                <view class="member-gender {{item.gender === '男' ? 'male' : 'female'}}">
+                  {{item.gender === '男' ? '男' : '女'}}
+                </view>
+              </view>
+              <view class="edit-overlay" wx:if="{{isEditMode}}" catchtap="editMember" data-id="{{item.id}}">
+                <image class="edit-icon" src="/images/edit-white.png" mode="aspectFit"></image>
+              </view>
+              <view class="delete-overlay" wx:if="{{item.showDelete}}" catchtap="deleteMember" data-id="{{item.id}}">
+                <text class="delete-icon">×</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 第二代（父辈） -->
+        <view class="generation" wx:if="{{generations.generation2.length > 0}}">
+          <view class="generation-label">父辈</view>
+          <view class="members-row">
+            <view class="horizontal-line" wx:if="{{generations.generation2.length > 1}}"></view>
+            <view class="member-node" wx:for="{{generations.generation2}}" wx:key="id" bindtap="selectMember" data-id="{{item.id}}" bindlongpress="showDeleteButton" data-id="{{item.id}}">
+              <view class="vertical-line" wx:if="{{item.parentId}}"></view>
+              <view class="member-card {{item.isAlive ? '' : 'deceased'}} {{selectedMemberId === item.id ? 'selected' : ''}}">
+                <image class="member-avatar" src="{{item.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+                <text class="member-name">{{item.name}}</text>
+                <text class="member-dates">{{item.birthYear}}{{item.deathYear ? '-'+item.deathYear : ''}}</text>
+                <view class="member-gender {{item.gender === '男' ? 'male' : 'female'}}">
+                  {{item.gender === '男' ? '男' : '女'}}
+                </view>
+              </view>
+              <view class="edit-overlay" wx:if="{{isEditMode}}" catchtap="editMember" data-id="{{item.id}}">
+                <image class="edit-icon" src="/images/edit-white.png" mode="aspectFit"></image>
+              </view>
+              <view class="delete-overlay" wx:if="{{item.showDelete}}" catchtap="deleteMember" data-id="{{item.id}}">
+                <text class="delete-icon">×</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 第三代（我辈） -->
+        <view class="generation" wx:if="{{generations.generation3.length > 0}}">
+          <view class="generation-label">我辈</view>
+          <view class="members-row">
+            <view class="horizontal-line" wx:if="{{generations.generation3.length > 1}}"></view>
+            <view class="member-node" wx:for="{{generations.generation3}}" wx:key="id" bindtap="selectMember" data-id="{{item.id}}" bindlongpress="showDeleteButton" data-id="{{item.id}}">
+              <view class="vertical-line" wx:if="{{item.parentId}}"></view>
+              <view class="member-card {{item.isAlive ? '' : 'deceased'}} {{selectedMemberId === item.id ? 'selected' : ''}}">
+                <image class="member-avatar" src="{{item.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+                <text class="member-name">{{item.name}}</text>
+                <text class="member-dates">{{item.birthYear}}{{item.deathYear ? '-'+item.deathYear : ''}}</text>
+                <view class="member-gender {{item.gender === '男' ? 'male' : 'female'}}">
+                  {{item.gender === '男' ? '男' : '女'}}
+                </view>
+              </view>
+              <view class="edit-overlay" wx:if="{{isEditMode}}" catchtap="editMember" data-id="{{item.id}}">
+                <image class="edit-icon" src="/images/edit-white.png" mode="aspectFit"></image>
+              </view>
+              <view class="delete-overlay" wx:if="{{item.showDelete}}" catchtap="deleteMember" data-id="{{item.id}}">
+                <text class="delete-icon">×</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 第四代（子辈） -->
+        <view class="generation" wx:if="{{generations.generation4.length > 0}}">
+          <view class="generation-label">子辈</view>
+          <view class="members-row">
+            <view class="horizontal-line" wx:if="{{generations.generation4.length > 1}}"></view>
+            <view class="member-node" wx:for="{{generations.generation4}}" wx:key="id" bindtap="selectMember" data-id="{{item.id}}" bindlongpress="showDeleteButton" data-id="{{item.id}}">
+              <view class="vertical-line" wx:if="{{item.parentId}}"></view>
+              <view class="member-card {{item.isAlive ? '' : 'deceased'}} {{selectedMemberId === item.id ? 'selected' : ''}}">
+                <image class="member-avatar" src="{{item.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+                <text class="member-name">{{item.name}}</text>
+                <text class="member-dates">{{item.birthYear}}{{item.deathYear ? '-'+item.deathYear : ''}}</text>
+                <view class="member-gender {{item.gender === '男' ? 'male' : 'female'}}">
+                  {{item.gender === '男' ? '男' : '女'}}
+                </view>
+              </view>
+              <view class="edit-overlay" wx:if="{{isEditMode}}" catchtap="editMember" data-id="{{item.id}}">
+                <image class="edit-icon" src="/images/edit-white.png" mode="aspectFit"></image>
+              </view>
+              <view class="delete-overlay" wx:if="{{item.showDelete}}" catchtap="deleteMember" data-id="{{item.id}}">
+                <text class="delete-icon">×</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 浮动添加按钮 -->
+  <view class="float-button" bindtap="addFamilyMember">
+    <text class="plus">+</text>
+  </view>
+
+  <!-- 添加/编辑成员模态框 -->
+  <view class="modal" wx:if="{{showMemberModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text>{{editingMemberId ? '编辑家族成员' : '添加家族成员'}}</text>
+        <view class="close-btn" bindtap="closeMemberModal">×</view>
+      </view>
+      <view class="modal-body">
+        <!-- 姓名输入 -->
+        <view class="input-group">
+          <text class="input-label">姓名</text>
+          <input class="custom-input" type="text" placeholder="请输入姓名" value="{{tempMember.name}}" bindinput="onNameInput" />
+        </view>
+        
+        <!-- 性别选择 -->
+        <view class="input-group">
+          <text class="input-label">性别</text>
+          <radio-group bindchange="onGenderChange">
+            <radio value="男" checked="{{tempMember.gender === '男'}}">男</radio>
+            <radio value="女" checked="{{tempMember.gender === '女'}}">女</radio>
+          </radio-group>
+        </view>
+        
+        <!-- 出生年份 -->
+        <view class="input-group">
+          <text class="input-label">出生年份</text>
+          <picker mode="date" fields="year" start="1900" end="2100" bindchange="onBirthYearChange">
+            <view class="picker-view">
+              {{tempMember.birthYear || '请选择出生年份'}}
+            </view>
+          </picker>
+        </view>
+        
+        <!-- 是否在世 -->
+        <view class="input-group">
+          <checkbox checked="{{!tempMember.isAlive}}" bindtap="toggleIsAlive">已故</checkbox>
+        </view>
+        
+        <!-- 逝世年份 -->
+        <view class="input-group" wx:if="{{!tempMember.isAlive}}">
+          <text class="input-label">逝世年份</text>
+          <picker mode="date" fields="year" start="1900" end="2100" bindchange="onDeathYearChange">
+            <view class="picker-view">
+              {{tempMember.deathYear || '请选择逝世年份'}}
+            </view>
+          </picker>
+        </view>
+        
+        <!-- 代际关系选择 -->
+        <view class="input-group">
+          <text class="input-label">所属代际</text>
+          <picker mode="selector" range="{{generationOptions}}" bindchange="onGenerationChange">
+            <view class="picker-view">
+              {{tempMember.generation ? generationOptions[tempMember.generation-1] : '请选择所属代际'}}
+            </view>
+          </picker>
+        </view>
+        
+        <!-- 父母关系选择 -->
+        <view class="input-group" wx:if="{{tempMember.generation > 1 && parentOptions.length > 0}}">
+          <text class="input-label">父/母亲</text>
+          <picker mode="selector" range="{{parentOptions}}" range-key="name" bindchange="onParentChange">
+            <view class="picker-view">
+              {{tempMember.parentName || '请选择父亲或母亲'}}
+            </view>
+          </picker>
+        </view>
+        
+        <!-- 简介 -->
+        <view class="input-group">
+          <text class="input-label">简介</text>
+          <textarea class="custom-input custom-textarea" placeholder="请输入简介" value="{{tempMember.description}}" bindinput="onDescriptionInput" auto-height />
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="cancel-btn" bindtap="closeMemberModal">取消</button>
+        <button class="confirm-btn" bindtap="saveMember">保存</button>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 成员详情模态框 -->
+  <view class="modal" wx:if="{{showDetailModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text>家族成员详情</text>
+        <view class="close-btn" bindtap="closeDetailModal">×</view>
+      </view>
+      <view class="modal-body">
+        <view class="detail-content" wx:if="{{selectedMember}}">
+          <image class="detail-avatar" src="{{selectedMember.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+          <text class="detail-name">{{selectedMember.name}}</text>
+          <text class="detail-life">{{selectedMember.birthYear}} - {{selectedMember.isAlive ? '至今' : selectedMember.deathYear}}</text>
+          <text class="detail-gender">{{selectedMember.gender}}</text>
+          <text class="detail-desc">{{selectedMember.description || '暂无简介'}}</text>
+          
+          <view class="relation-info" wx:if="{{selectedMember.relations && selectedMember.relations.length > 0}}">
+            <text class="relation-title">家族关系</text>
+            <view class="relation-list">
+              <view class="relation-item" wx:for="{{selectedMember.relations}}" wx:key="id">
+                <text class="relation-type">{{item.type}}：</text>
+                <text class="relation-name">{{item.name}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="cancel-btn" bindtap="closeDetailModal">关闭</button>
+        <button class="confirm-btn" bindtap="editSelectedMember">编辑</button>
+      </view>
+    </view>
+  </view>
+</view>

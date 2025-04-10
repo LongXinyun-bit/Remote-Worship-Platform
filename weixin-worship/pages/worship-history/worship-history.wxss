@@ -1,0 +1,129 @@
+/* pages/worship-history/worship-history.wxss */
+.worship-history-container {
+  padding: 30rpx;
+  background-color: #FFFDE7;
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.page-title {
+  font-size: 42rpx;
+  font-weight: bold;
+  color: #558B2F;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.page-subtitle {
+  font-size: 28rpx;
+  color: #8BC34A;
+  display: block;
+}
+
+.history-list {
+  width: 100%;
+}
+
+.history-item {
+  display: flex;
+  background-color: #F1F8E9;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.history-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 120rpx;
+  padding-right: 20rpx;
+  border-right: 1px solid #DCEDC8;
+}
+
+.history-day {
+  font-size: 42rpx;
+  font-weight: bold;
+  color: #558B2F;
+}
+
+.history-month, .history-year {
+  font-size: 24rpx;
+  color: #689F38;
+}
+
+.history-content {
+  flex: 1;
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.history-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #558B2F;
+}
+
+.history-time {
+  font-size: 24rpx;
+  color: #9E9E9E;
+}
+
+.offerings-list, .wishes-content {
+  margin-top: 10rpx;
+}
+
+.offerings-label, .wishes-label {
+  font-size: 26rpx;
+  color: #689F38;
+  margin-right: 10rpx;
+}
+
+.offerings-value, .wishes-value {
+  font-size: 26rpx;
+  color: #333;
+}
+
+/* 空状态样式 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx 0;
+}
+
+.empty-icon {
+  width: 120rpx;
+  height: 120rpx;
+  margin-bottom: 20rpx;
+  opacity: 0.6;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 30rpx;
+}
+
+.start-btn {
+  background-color: #8BC34A;
+  color: white;
+  font-size: 28rpx;
+  padding: 15rpx 30rpx;
+  border-radius: 30rpx;
+} 

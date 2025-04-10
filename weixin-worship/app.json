@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/home/home",
+    "pages/worship/worship",
+    "pages/family-tree/family-tree",
+    "pages/tools/tools",
+    "pages/profile/profile",
+    "pages/worship-history/worship-history"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#558B2F",
+    "navigationBarTitleText": "远程祭祖平台",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#8E8E93",
+    "selectedColor": "#007AFF",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于地图展示"
+    }
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+} 

@@ -1,0 +1,66 @@
+<view class="container tools-container">
+  <!-- 顶部图片区域 -->
+  <image class="top-image" src="{{topImage}}" mode="aspectFill"></image>
+
+  <view class="header">
+    <text class="page-title">实用工具</text>
+    <text class="page-subtitle">祭祖日历与传统文化科普</text>
+  </view>
+
+  <!-- 日历部分 -->
+  <view class="calendar-section">
+    <view class="section-header">
+      <text class="section-title">日历</text>
+      <text class="date">{{today}} {{currentTime}}</text>
+    </view>
+    
+    <view class="calendar-card">
+      <view class="lunar-date">
+        <text>农历 {{lunarDate}}</text>
+        <text class="festival" wx:if="{{festival}}">{{festival}}</text>
+      </view>
+      
+      <view class="calendar-content">
+        <view class="good-bad-section">
+          <view class="good-section">
+            <text class="title">宜</text>
+            <view class="items">
+              <text class="item" wx:for="{{goodItems}}" wx:key="*this">{{item}}</text>
+            </view>
+          </view>
+          
+          <view class="bad-section">
+            <text class="title">忌</text>
+            <view class="items">
+              <text class="item" wx:for="{{badItems}}" wx:key="*this">{{item}}</text>
+            </view>
+          </view>
+        </view>
+        
+        <view class="daily-tip">
+          <text>{{dailyTip}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 知识科普部分 -->
+  <view class="knowledge-section">
+    <view class="section-header">
+      <text class="section-title">祭祖知识</text>
+      <text class="subtitle">来源: 微信公众号精选</text>
+    </view>
+    
+    <scroll-view class="knowledge-cards" scroll-y="true">
+      <view class="knowledge-card" wx:for="{{knowledgeItems}}" wx:key="id" bindtap="viewKnowledge" data-id="{{item.id}}">
+        <image class="knowledge-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="knowledge-info">
+          <text class="knowledge-title">{{item.title}}</text>
+          <text class="knowledge-desc">{{item.desc}}</text>
+          <text class="knowledge-date">{{item.date}}</text>
+        </view>
+        <view class="arrow">></view>
+      </view>
+    </scroll-view>
+  </view>
+</view> 

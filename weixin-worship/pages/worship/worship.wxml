@@ -1,0 +1,154 @@
+<view class="container worship-container">
+  <view class="worship-header">
+    <text class="page-title">虚拟祭祖</text>
+    <text class="page-subtitle">选择地点、墓碑样式和祭品，为先人献上心意</text>
+  </view>
+
+  <view class="flex-layout">
+    <!-- 左侧菜单栏 -->
+    <view class="menu-bar">
+      <view class="menu-item {{currentPanel === 'location' ? 'active' : ''}}" bindtap="switchPanel" data-panel="location">
+        <image class="menu-icon" src="../../images/map-icon.png" mode="aspectFit"></image>
+        <text>选择位置</text>
+      </view>
+      <view class="menu-item {{currentPanel === 'tombstone' ? 'active' : ''}}" bindtap="switchPanel" data-panel="tombstone">
+        <image class="menu-icon" src="../../images/tombstone-icon.png" mode="aspectFit"></image>
+        <text>墓碑样式</text>
+      </view>
+      <view class="menu-item {{currentPanel === 'offerings' ? 'active' : ''}}" bindtap="switchPanel" data-panel="offerings">
+        <image class="menu-icon" src="../../images/offering-icon.png" mode="aspectFit"></image>
+        <text>选择祭品</text>
+      </view>
+      <view class="menu-item {{currentPanel === 'info' ? 'active' : ''}}" bindtap="switchPanel" data-panel="info">
+        <image class="menu-icon" src="../../images/info-icon.png" mode="aspectFit"></image>
+        <text>祭祖信息</text>
+      </view>
+    </view>
+
+    <!-- 右侧内容区域 -->
+    <view class="content-area">
+      <!-- 位置选择面板 -->
+      <view class="panel" wx:if="{{currentPanel === 'location'}}">
+        <view class="panel-title">选择墓碑位置</view>
+        
+        <!-- 全宽地图区域 -->
+        <view class="map-container">
+          <map id="worshipMap" 
+               longitude="{{location.longitude}}" 
+               latitude="{{location.latitude}}" 
+               scale="14" 
+               bindtap="onMapTap"
+               markers="{{markers}}"
+               show-location="true"
+               style="width: 100%; height: 100%;">
+          </map>
+          
+          <!-- 高德风格搜索框，悬浮在地图上方 -->
+          <view class="map-search-overlay">
+            <view class="search-box">
+              <input class="search-input" type="text" placeholder="搜索地点" bindinput="onLocationInput" value="{{searchText}}" />
+              <view class="search-btn" bindtap="searchLocation">
+                <image class="search-icon" src="../../images/search-icon.png" mode="aspectFit"></image>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="location-info">
+          <text class="current-location">当前位置: {{searchText || '未选择'}}</text>
+          <button class="confirm-btn" bindtap="confirmLocation" wx:if="{{searchText}}">确认使用此位置</button>
+        </view>
+      </view>
+
+      <!-- 墓碑样式选择面板 -->
+      <view class="panel" wx:if="{{currentPanel === 'tombstone'}}">
+        <view class="panel-title">选择墓碑样式</view>
+        <view class="tombstone-grid">
+          <view class="tombstone-item {{selectedTombstone === index ? 'selected' : ''}}" 
+                wx:for="{{tombstoneStyles}}" 
+                wx:key="index"
+                bindtap="selectTombstone" 
+                data-index="{{index}}">
+            <view class="item-container">
+              <image class="tombstone-image" src="{{item.image}}" mode="aspectFit"></image>
+              <text class="tombstone-name">{{item.name}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 祭品选择面板 -->
+      <view class="panel" wx:if="{{currentPanel === 'offerings'}}">
+        <view class="panel-title">选择祭品</view>
+        <view class="offerings-grid">
+          <view class="offering-item {{item.selected ? 'selected' : ''}}" 
+                wx:for="{{offerings}}" 
+                wx:key="id"
+                bindtap="toggleOffering" 
+                data-id="{{item.id}}">
+            <view class="item-container">
+              <image class="offering-image" src="{{item.image}}" mode="aspectFit"></image>
+              <text class="offering-name">{{item.name}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 祭祖信息面板 -->
+      <view class="panel" wx:if="{{currentPanel === 'info'}}">
+        <view class="panel-title">祭祖信息</view>
+        <view class="info-wrapper">
+          <view class="input-group">
+            <text class="input-label">先人姓名</text>
+            <input class="custom-input" type="text" placeholder="请输入先人姓名" model:value="{{ancestorName}}" />
+          </view>
+          <view class="input-group">
+            <text class="input-label">寄语</text>
+            <textarea class="custom-input custom-textarea" placeholder="请输入对先人的寄语" model:value="{{message}}" auto-height="true" />
+          </view>
+        </view>
+      </view>
+
+      <!-- 右侧场景展示 -->
+      <view class="scene-display">
+        <!-- 山坡背景和墓碑 -->
+        <image class="mountain-bg" src="../../images/mountain-bg.png" mode="aspectFill"></image>
+        
+        <!-- 动态元素：云朵 -->
+        <view class="cloud cloud-1"></view>
+        <view class="cloud cloud-2"></view>
+        
+        <!-- 动态元素：小鸟 -->
+        <view class="bird"></view>
+        
+        <!-- 墓碑 -->
+        <view class="tombstone-display">
+          <image class="tombstone-on-hill" 
+                src="{{tombstoneStyles[selectedTombstone].image}}" 
+                mode="aspectFit"></image>
+        </view>
+        
+        <!-- 动态元素：祭品显示区 -->
+        <view class="offerings-display">
+          <view wx:for="{{offerings}}" wx:key="id" wx:if="{{item.selected}}" 
+                class="offering-on-scene" style="left: {{40 + index * 60}}rpx;">
+            <image src="{{item.image}}" mode="aspectFit"></image>
+          </view>
+        </view>
+        
+        <!-- 悬浮的祭品和消息 -->
+        <view class="floating-messages">
+          <view class="floating-message" 
+                wx:for="{{showFloatingMessages}}" 
+                wx:key="id" 
+                style="top: {{item.top}}rpx; left: {{item.left}}rpx;">
+            <text>{{item.text}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部开始祭祖按钮 -->
+  <button class="start-worship-btn" bindtap="startWorship">开始祭祖</button>
+</view>

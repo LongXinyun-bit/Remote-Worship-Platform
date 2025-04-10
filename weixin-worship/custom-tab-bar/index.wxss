@@ -1,0 +1,35 @@
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120rpx;
+  background: white;
+  display: flex;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.tab-bar-item {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10rpx 0;
+}
+
+.tab-bar-item-text {
+  font-size: 36rpx; /* 更大的字体 */
+  font-weight: 500;
+  line-height: 1.4;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+/* 设置选中状态的样式 */
+.tab-bar-item.selected .tab-bar-item-text {
+  font-weight: 600;
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+} 

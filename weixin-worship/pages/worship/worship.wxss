@@ -1,0 +1,481 @@
+page {
+  --primary: #9BC88B;
+  --secondary: #C5E1A5;
+  --accent: #8BC34A;
+  --dark: #558B2F;
+  --light: #F1F8E9;
+  --bg: #FFFDE7;
+  --text: #33691E;
+  --border: #DCEDC8;
+  background-color: var(--bg);
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  height: 100%;
+  width: 100%;
+}
+
+.worship-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20rpx;
+  background-color: var(--bg);
+  overflow: hidden;
+}
+
+.worship-header {
+  padding: 20rpx;
+  text-align: center;
+  background-color: var(--light);
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+}
+
+.page-title {
+  font-size: 42rpx;
+  font-weight: bold;
+  color: var(--dark);
+}
+
+.page-subtitle {
+  font-size: 28rpx;
+  color: var(--text);
+  opacity: 0.8;
+}
+
+/* 响应式布局 */
+.flex-layout {
+  display: flex;
+  flex: 1;
+  gap: 20rpx;
+  overflow: hidden;
+}
+
+/* 菜单栏样式 */
+.menu-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+  width: 140rpx;  /* 保持原来的宽度 */
+  padding: 15rpx;
+  background-color: var(--light);
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 15rpx 10rpx;
+  border-radius: 12rpx;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.menu-item.active {
+  background-color: var(--primary);
+  color: white;
+  transform: translateY(-2rpx);
+  box-shadow: 0 4rpx 8rpx rgba(0,0,0,0.1);
+}
+
+.menu-icon {
+  width: 45rpx;
+  height: 45rpx;
+}
+
+.menu-item text {
+  font-size: 22rpx;
+  text-align: center;
+}
+
+/* 内容区域样式 */
+.content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--light);
+  border-radius: 16rpx;
+  padding: 20rpx;  /* 保持原来的内边距 */
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+
+.panel-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: var(--dark);
+  text-align: center;
+  padding-bottom: 15rpx;
+  margin-bottom: 15rpx;
+  border-bottom: 2rpx dashed var(--border);
+}
+
+/* 地图相关样式 */
+.map-container {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  height: 650rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+  margin-bottom: 20rpx;
+}
+
+.map-search-overlay {
+  position: absolute;
+  top: 20rpx;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  height: 80rpx;
+  background-color: white;
+  border-radius: 40rpx;
+  box-shadow: 0 4rpx 15rpx rgba(0,0,0,0.2);
+  pointer-events: auto;
+}
+
+.search-input {
+  flex: 1;
+  height: 80rpx;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  border: none;
+}
+
+.search-btn {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  border-top-right-radius: 40rpx;
+  border-bottom-right-radius: 40rpx;
+}
+
+.search-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.location-info {
+  padding: 15rpx;
+  background-color: white;
+  border-radius: 12rpx;
+  margin-top: 10rpx;
+}
+
+.current-location {
+  display: block;
+  font-size: 26rpx;
+  color: var(--text);
+  margin-bottom: 15rpx;
+}
+
+.confirm-btn {
+  background-color: var(--accent);
+  color: white;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  padding: 12rpx 0;
+  width: 100%;
+}
+
+/* 墓碑样式选择 */
+.tombstone-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20rpx;
+  padding: 10rpx;
+  overflow-y: auto;
+}
+
+.tombstone-item {
+  width: calc(50% - 10rpx);
+  margin-bottom: 20rpx;
+}
+
+.item-container {
+  background-color: white;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.05);
+  border: 2rpx solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.tombstone-image {
+  width: 100rpx;
+  height: 100rpx;
+  margin-bottom: 15rpx;
+}
+
+.tombstone-name {
+  font-size: 26rpx;
+  color: var(--text);
+  text-align: center;
+}
+
+.tombstone-item.selected .item-container {
+  background-color: var(--secondary);
+  transform: translateY(-5rpx);
+  box-shadow: 0 6rpx 12rpx rgba(0,0,0,0.08);
+  border-color: var(--accent);
+}
+
+/* 祭品选择样式 */
+.offerings-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20rpx;
+  padding: 10rpx;
+  overflow-y: auto;
+}
+
+.offering-item {
+  width: calc(33.33% - 15rpx);
+  margin-bottom: 20rpx;
+}
+
+.offering-image {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 15rpx;
+}
+
+.offering-name {
+  font-size: 26rpx;
+  color: var(--text);
+  text-align: center;
+}
+
+.offering-item.selected .item-container {
+  background-color: var(--secondary);
+  transform: translateY(-5rpx);
+  box-shadow: 0 6rpx 12rpx rgba(0,0,0,0.08);
+  border-color: var(--accent);
+}
+
+/* 信息填写样式 - 修改 */
+.input-group {
+  margin-bottom: 25rpx;
+}
+
+.input-label {
+  display: block;
+  font-size: 30rpx;  /* 稍微增大字体 */
+  color: var(--dark);  /* 加深颜色 */
+  margin-bottom: 12rpx;
+  font-weight: 500;  /* 加粗字体 */
+}
+
+.custom-input {
+  width: 100%;
+  border: 2rpx solid var(--border);
+  border-radius: 12rpx;
+  padding: 20rpx;
+  font-size: 30rpx;  /* 增大字体 */
+  background-color: white;
+  box-sizing: border-box;
+  color: var(--text);
+  min-height: 90rpx;  /* 增加最小高度 */
+  line-height: 1.5;  /* 增加行高 */
+}
+
+.custom-textarea {
+  min-height: 200rpx;  /* 增加文本框高度 */
+}
+
+/* 修复placeholder样式 */
+.custom-input::placeholder {
+  color: #aaa;
+  font-size: 28rpx;
+}
+
+/* 场景展示 */
+.scene-display {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.mountain-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* 动态元素：云朵 */
+.cloud {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.cloud-1 {
+  width: 100rpx;
+  height: 60rpx;
+  top: 80rpx;
+  left: 50rpx;
+  animation: cloud-move 30s linear infinite;
+}
+
+.cloud-2 {
+  width: 150rpx;
+  height: 80rpx;
+  top: 130rpx;
+  right: 100rpx;
+  animation: cloud-move 40s linear infinite reverse;
+}
+
+@keyframes cloud-move {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(100rpx); }
+  100% { transform: translateX(0); }
+}
+
+/* 动态元素：小鸟 */
+.bird {
+  position: absolute;
+  width: 40rpx;
+  height: 20rpx;
+  top: 150rpx;
+  left: 200rpx;
+  /* 微信小程序中不能在WXSS中使用本地图片作为background-image
+  background-image: url('/images/bird.png');
+  */
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: bird-fly 15s linear infinite;
+}
+
+@keyframes bird-fly {
+  0% { transform: translateX(-100rpx) translateY(0); }
+  25% { transform: translateX(100rpx) translateY(-30rpx); }
+  50% { transform: translateX(300rpx) translateY(0); }
+  75% { transform: translateX(100rpx) translateY(30rpx); }
+  100% { transform: translateX(-100rpx) translateY(0); }
+}
+
+.tombstone-display {
+  position: absolute;
+  bottom: 100rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180rpx;
+  height: 180rpx;
+}
+
+.tombstone-on-hill {
+  width: 100%;
+  height: 100%;
+}
+
+/* 漂浮消息动画 */
+.floating-messages {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.floating-message {
+  position: absolute;
+  max-width: 200rpx;
+  padding: 8rpx 12rpx;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10rpx;
+  font-size: 22rpx;
+  color: var(--text);
+  animation: float 3s ease-out forwards;
+  box-shadow: 0 2rpx 6rpx rgba(0,0,0,0.1);
+  text-align: center;
+  border: 1rpx solid var(--border);
+}
+
+@keyframes float {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.8);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(-80rpx) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100rpx) scale(0.8);
+  }
+}
+
+/* 底部按钮 - 修改 */
+.start-worship-btn {
+  width: 90%;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 32rpx;
+  background-color: var(--accent);
+  color: white;
+  border-radius: 45rpx;
+  margin: 15rpx auto 30rpx auto;  /* 上右下左边距，使按钮居中并添加底部间距 */
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.2);
+  position: relative;  /* 确保按钮正常定位 */
+  z-index: 10;  /* 确保按钮在最上层 */
+}
+
+/* 为整个容器添加底部边距，确保按钮完全可见 */
+.worship-container {
+  padding-bottom: 50rpx;
+}
+
+.info-wrapper {
+  padding: 10rpx;
+  width: 100%;
+  box-sizing: border-box;
+}

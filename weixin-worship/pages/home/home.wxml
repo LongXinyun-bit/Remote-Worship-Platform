@@ -1,0 +1,69 @@
+<view class="container home-container">
+  <!-- 添加背景图片 -->
+  <image class="background-image" src="/images/mountain-bg.png" mode="aspectFill"></image>
+  
+  <view class="content-wrapper">
+    <view class="welcome-section">
+      <image class="user-avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <view class="welcome-text">
+        <text class="welcome">欢迎, {{userInfo.nickName || '亲爱的用户'}}</text>
+        <text class="subtitle">在这里您可以进行祭祖活动，管理家族树并使用实用工具</text>
+      </view>
+    </view>
+
+    <!-- 大型首页图片 -->
+    <view class="home-banner">
+      <image class="banner-image" src="/images/首页.png" mode="widthFix"></image>
+    </view>
+
+    <view class="feature-cards">
+      <!-- 祭祀活动卡片 -->
+      <view class="feature-card" bindtap="navigateToWorship">
+        <image class="feature-icon" src="/images/worship-icon.png" mode="aspectFit"></image>
+        <view class="feature-info">
+          <text class="feature-title">祭祖活动</text>
+          <text class="feature-desc">虚拟祭祀，献上思念</text>
+        </view>
+        <view class="arrow">></view>
+      </view>
+
+      <!-- 家族树卡片 -->
+      <view class="feature-card" bindtap="navigateToFamilyTree">
+        <image class="feature-icon" src="/images/family-tree-icon.png" mode="aspectFit"></image>
+        <view class="feature-info">
+          <text class="feature-title">家族树</text>
+          <text class="feature-desc">记录家族历史，传承血脉</text>
+        </view>
+        <view class="arrow">></view>
+      </view>
+
+      <!-- 实用工具卡片 -->
+      <view class="feature-card" bindtap="navigateToTools">
+        <image class="feature-icon" src="/images/tools-icon.png" mode="aspectFit"></image>
+        <view class="feature-info">
+          <text class="feature-title">实用工具</text>
+          <text class="feature-desc">祭祀日历与知识科普</text>
+        </view>
+        <view class="arrow">></view>
+      </view>
+    </view>
+
+    <view class="recent-activities">
+      <view class="section-title">近期祭祀记录</view>
+      <block wx:if="{{recentActivities.length > 0}}">
+        <view class="activity-item" wx:for="{{recentActivities}}" wx:key="id">
+          <image class="activity-icon" src="/images/tombstone-icon.png" mode="aspectFit"></image>
+          <view class="activity-content">
+            <text class="activity-name">祭祀 {{item.ancestorName}}</text>
+            <text class="activity-desc">{{item.date}} | 祭品: {{item.offerings}}</text>
+          </view>
+        </view>
+      </block>
+      <view class="no-data" wx:else>
+        <image class="empty-icon" src="/images/offering-icon.png" mode="aspectFit"></image>
+        <text>暂无祭祀记录</text>
+        <view class="start-btn" bindtap="navigateToWorship">开始祭祀</view>
+      </view>
+    </view>
+  </view>
+</view> 

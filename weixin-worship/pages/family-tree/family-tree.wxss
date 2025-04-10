@@ -1,0 +1,423 @@
+/* 设置绿色主题变量与其他页面一致 */
+page {
+  --primary: #9BC88B;
+  --secondary: #C5E1A5;
+  --accent: #8BC34A;
+  --dark: #558B2F;
+  --light: #F1F8E9;
+  --bg: #FFFDE7;
+  --text: #33691E;
+  --border: #DCEDC8;
+  background-color: var(--bg);
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  height: 100%;
+  width: 100%;
+}
+
+.family-tree-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20rpx;
+  background-color: var(--bg);
+  overflow: hidden;
+}
+
+.header {
+  padding: 20rpx;
+  text-align: center;
+  background-color: var(--light);
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+}
+
+.page-title {
+  font-size: 42rpx;
+  font-weight: bold;
+  color: var(--dark);
+}
+
+.page-subtitle {
+  font-size: 28rpx;
+  color: var(--text);
+  opacity: 0.8;
+}
+
+/* 主内容区 */
+.content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--light);
+  border-radius: 16rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+}
+
+/* 工具栏 */
+.toolbar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20rpx;
+  padding: 10rpx;
+  background-color: white;
+  border-radius: 12rpx;
+}
+
+.tool-btn {
+  padding: 10rpx 20rpx;
+  font-size: 26rpx;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 15rpx;
+}
+
+.tool-btn-icon {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 8rpx;
+}
+
+/* 家族树视图 */
+.tree-view {
+  flex: 1;
+  overflow: auto;
+  padding: 20rpx;
+  background-color: white;
+  border-radius: 12rpx;
+}
+
+/* 家族树样式 */
+.family-tree {
+  position: relative;
+  padding: 20rpx 0;
+  min-height: 800rpx;
+}
+
+/* 树干线 */
+.tree-trunk {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 6rpx;
+  height: 100%;
+  background-color: var(--secondary);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* 家族层级 */
+.generation {
+  position: relative;
+  margin-bottom: 60rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.generation-label {
+  background-color: var(--dark);
+  color: white;
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  margin-bottom: 20rpx;
+  z-index: 2;
+}
+
+/* 成员行 */
+.members-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* 水平连接线 */
+.horizontal-line {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  width: 50%;
+  height: 4rpx;
+  background-color: var(--secondary);
+}
+
+/* 成员节点 */
+.member-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 15rpx;
+  width: 160rpx;
+}
+
+/* 垂直连接线 */
+.vertical-line {
+  position: absolute;
+  top: -20rpx;
+  left: 50%;
+  width: 4rpx;
+  height: 20rpx;
+  background-color: var(--secondary);
+  transform: translateX(-50%);
+}
+
+.member-card {
+  width: 100%;
+  background-color: white;
+  border-radius: 12rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0,0,0,0.1);
+  padding: 10rpx;
+  border: 2rpx solid var(--secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.member-card.deceased {
+  border: 2rpx dashed #AAA;
+  background-color: #F5F5F5;
+}
+
+.member-card.selected {
+  border: 3rpx solid var(--accent);
+  transform: scale(1.05);
+  box-shadow: 0 6rpx 12rpx rgba(0,0,0,0.15);
+}
+
+.member-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-bottom: 10rpx;
+  border: 2rpx solid var(--primary);
+}
+
+.member-name {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: var(--dark);
+  text-align: center;
+  margin-bottom: 5rpx;
+}
+
+.member-dates {
+  font-size: 20rpx;
+  color: #666;
+  text-align: center;
+}
+
+.member-gender {
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: white;
+}
+
+.member-gender.male {
+  background-color: #2196F3;
+}
+
+.member-gender.female {
+  background-color: #F06292;
+}
+
+/* 添加成员浮动按钮 */
+.float-button {
+  position: fixed;
+  bottom: 40rpx;
+  right: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background-color: var(--accent);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.plus {
+  font-size: 60rpx;
+  color: white;
+  line-height: 1;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 50rpx;
+  text-align: center;
+}
+
+.empty-image {
+  width: 300rpx;
+  height: 300rpx;
+  margin-bottom: 40rpx;
+}
+
+.empty-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 20rpx;
+}
+
+.empty-desc {
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.create-btn {
+  padding: 15rpx 30rpx;
+  font-size: 28rpx;
+  background-color: var(--accent);
+  color: white;
+  border-radius: 40rpx;
+}
+
+/* 模态框样式 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  width: 80%;
+  background-color: white;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary);
+  color: white;
+}
+
+.close-btn {
+  font-size: 36rpx;
+  line-height: 1;
+  padding: 10rpx;
+}
+
+.modal-body {
+  padding: 30rpx 20rpx;
+  max-height: 65vh;
+  overflow-y: auto;
+}
+
+.input-group {
+  margin-bottom: 20rpx;
+}
+
+.input-label {
+  font-size: 28rpx;
+  color: var(--dark);
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.custom-input, .picker-view {
+  width: 100%;
+  height: 80rpx;
+  padding: 0 20rpx;
+  border: 2rpx solid #DCEDC8;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  background-color: #FCFCFC;
+}
+
+.picker-view {
+  display: flex;
+  align-items: center;
+  color: #333;
+}
+
+.custom-textarea {
+  height: 160rpx;
+  padding: 20rpx;
+}
+
+.modal-footer {
+  display: flex;
+  padding: 20rpx;
+  border-top: 1rpx solid #DCEDC8;
+}
+
+.cancel-btn, .confirm-btn {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 40rpx;
+}
+
+.cancel-btn {
+  background-color: #EEEEEE;
+  color: #666;
+  margin-right: 10rpx;
+}
+
+.confirm-btn {
+  background-color: var(--accent);
+  color: white;
+  margin-left: 10rpx;
+}
+
+/* 删除按钮样式 */
+.delete-overlay {
+  position: absolute;
+  top: -15rpx;
+  right: -15rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background-color: #ff4d4f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.delete-icon {
+  color: white;
+  font-size: 28rpx;
+  font-weight: bold;
+} 

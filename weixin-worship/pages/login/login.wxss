@@ -1,0 +1,86 @@
+.login-container {
+  justify-content: center;
+  padding-top: 100rpx;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80rpx;
+}
+
+.logo {
+  width: 180rpx;
+  height: 180rpx;
+  margin-bottom: 30rpx;
+}
+
+.app-name {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 20rpx;
+}
+
+.app-slogan {
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+}
+
+.login-form {
+  width: 85%;
+  max-width: 600rpx;
+}
+
+.input-group {
+  margin-bottom: 40rpx;
+}
+
+.input-label {
+  display: block;
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+  color: #666;
+}
+
+input {
+  width: 100%;
+  height: 80rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  font-size: 30rpx;
+  background-color: #fff;
+}
+
+.login-btn, .register-btn {
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 32rpx;
+  margin-top: 20rpx;
+}
+
+.wechat-login {
+  margin-top: 60rpx;
+  text-align: center;
+}
+
+.wechat-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #07c160;
+  color: #fff;
+  border: none;
+  font-size: 30rpx;
+}
+
+.wechat-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+} 
