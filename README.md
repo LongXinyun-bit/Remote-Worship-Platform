@@ -1,4 +1,4 @@
-# Remote-Worship-Platform
+
 # Remote-Worship-Platform
 
 ## 项目介绍
@@ -51,3 +51,63 @@
 - 打造跨平台版本，服务更多用户
 
 ---
+
+
+
+# Remote-Worship-Platform
+
+## Project Introduction
+
+I am Long Xinyun, a developer passionate about traditional culture. During a Qingming Festival when returning home for ancestral worship, I deeply realized the guilt and longing felt by many who work far from home or are unable to return due to busy schedules. This WeChat Mini Program is designed for these individuals - whether international students or remote workers, they can conduct ancestral worship activities online, expressing filial piety and remembrance at any time, unrestricted by time and space.
+
+## Core Values
+
+- **Breaking Spatiotemporal Constraints**: Users can perform ancestral worship anytime, anywhere via mobile devices, not limited to the Qingming Festival
+- **Family Genealogy Records**: The online family tree system helps preserve family historical information, preventing the loss of family history as older generations pass away, enabling digital inheritance
+- **Cultural Inheritance**: The toolkit provides educational content about Qingming Festival (National Intangible Cultural Heritage) customs and cultural values
+- **Value Guidance**: Promotes the inheritance and development of excellent Chinese traditional culture, enhances cultural confidence, and implements the important connotations of cultural inheritance in the "Chinese Dream"
+
+## Key Features
+
+- **User Authentication**: Quick login through WeChat authorization
+- **Online Worship**: Multiple offerings and worship ceremony processes
+- **Family Tree Management**: Create and maintain digitalized family genealogy
+- **Worship Tools**: Digital tools required for traditional worship ceremonies
+- **Cultural Education**: Knowledge dissemination about intangible cultural heritage
+
+## Technical Implementation
+
+### Frontend Stack
+- **Framework**: Native WeChat Mini Program development (WXML/WXSS/JavaScript)
+- **UI Design**: Custom iOS-style interface with optimized user experience through custom components
+- **State Management**: Global state maintenance using App instance's globalData
+- **Component-Based Development**: Custom component development to improve code reusability and maintainability
+
+### Backend & Data Processing
+- **Login System**: Implemented dual verification mechanism with traditional username/password login and WeChat quick login
+- **Data Persistence**: User data local storage using wx.setStorage/wx.getStorage
+- **User Authentication**: WeChat authorized login implemented by combining wx.login and wx.getUserInfo
+- **Data Synchronization**: Bidirectional synchronization mechanism for user login, logout, and worship activity records
+- **Local Cache**: Automatic user state restoration functionality upon application startup, enhancing user experience
+
+### Core Technical Highlights
+- **Custom TabBar**: Custom bottom navigation bar implemented using component, with smooth transition animation effects
+- **Page Routing Optimization**: Rational design of page hierarchy structure, optimizing page switching experience
+- **Responsive Design**: Using rpx units to adapt to devices with different screen sizes
+- **Performance Optimization**: Image resource compression processing, avoiding unnecessary page repaints to improve performance
+- **Modular Development**: Modularized design of login, user management, and worship functionality, facilitating maintenance and expansion
+
+### User Data Management
+- **Secure Storage**: User information and worship records protected through security mechanisms provided by WeChat
+- **Offline Functionality**: Support for basic functionality in offline environments, with automatic data synchronization when online
+- **User State Management**: Globally unified user state control, ensuring data consistency between pages
+
+## Future Plans
+
+- Add AR functionality for a more immersive worship experience
+- Add family story sharing feature
+- Develop cross-platform versions to serve more users
+
+---
+
+*This project is dedicated to inheriting excellent Chinese traditional culture, connecting modern life with traditional customs, and allowing the virtue of "remembering ancestors" to continue in the digital age.*
